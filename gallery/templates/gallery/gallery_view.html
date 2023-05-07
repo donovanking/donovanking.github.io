@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+    <h1 class="text-center my-5">Gallery</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for image in images %}
+        <div class="col">
+          <div class="card h-100">
+            <a href="{{ image.image.url }}" data-bs-toggle="lightbox" data-bs-gallery="gallery">
+                <div class="image-wrapper">
+                    <div class="card-img-top bg-image hover-caption" style="background-image: url('{{ image.image.url }}')"></div>
+                        <div class="caption">
+                            <p>{{ image.title }}</p>
+                        </div>
+                </div>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Lightbox plugin script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js" integrity="sha512-f7FQ2vqg3hVr29pCxiYzVdM0qI3Dk9XpNlxE67dcZ/yaI0GBoNzlSud/iBz1f2Q5m+Cksgah9Q5flbZPssSYfw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+    .image-wrapper {
+      position: relative;
+    }
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+    .image-wrapper:hover .caption {
+      opacity: 1;
+    }
+  </style>
+{% endblock %}
